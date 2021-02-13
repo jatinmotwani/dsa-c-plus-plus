@@ -32,3 +32,39 @@
 
 // For the remaining cases, 1 <= N <= 1000.
 
+// Sample Test Case:
+// 1 2 0 7 2 0 2 2
+// x o x o x x x x
+
+// BruteForce Approach:
+// 1. Iterate over all the elements and check if it is record breaking day or not.
+// Note: To check if a[i] is record breaking day, we have to iterate over a[0],a[1],...,a[i-1]
+// TIme Complexity => O(n^2)
+
+// Optimized Approach
+// Keep a maxium variable to calculate maximum value till current, update whenever v[i]>maximum
+// Keep a ans variable and keep it increasing when our condition is satisfied
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    int v[n+1];
+    v[n]=-1;
+    for(int i =0; i<n;i++){
+        cin >> v[i];
+    }
+    int maximum = -1;
+    int ans = 0;
+    for(int i=0;i<n;i++){
+               if(v[i]>maximum && v[i]>v[i+1]){
+                   maximum = v[i];
+                   ans++;
+               }
+               maximum = max(maximum,v[i]);
+    }
+    cout << ans << endl;
+}
+
